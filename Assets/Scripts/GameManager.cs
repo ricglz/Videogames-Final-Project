@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
 		ResetStreak();
 		misses ++;
 		if(misses >= 10){
-			Debug.Log("QUIT");
 			Application.Quit();
 		}
 	}
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if(hitNotes + misses == 103){
-			Debug.Log("QUIT");
 			Application.Quit();
 		}
 		UpdateGUI();
