@@ -5,7 +5,7 @@ using UnityEngine;
 public class Puzzle : MonoBehaviour {
 
 	public Texture2D image;
-	public int blocksPerLine = 4;
+	public int blocksPerLine;
 	public int shuffleLength = 40;
 	Block emptyBlock;
 	Block[,] blocks;
@@ -24,6 +24,7 @@ public class Puzzle : MonoBehaviour {
 	}
 
 	void CreatePuzzle() {
+		blocksPerLine = PuzzleManager.currentPiecesPerLine;
 		blocks = new Block[blocksPerLine, blocksPerLine];
 		Texture2D[,] imageSlices = ImageSlicer.GetSlices(image, blocksPerLine);
 		for(int i = 0; i < blocksPerLine; i++) {
@@ -129,12 +130,30 @@ public class Puzzle : MonoBehaviour {
 	}
 
 	void CheckIfIsSolved() {
+		if(state != GameState.Playing) {
+			return;
+		}
 		foreach(Block block in blocks) {
 			if(!block.isAtStartingCoordinate()) {
 				return;
 			}
 		}
 		state = GameState.Solved;
-		emptyBlock.gameObject.SetActive(true);
+		RestartGame();
+	}
+
+	void RestartGame() {
+		PuzzleManager.score++;
+		PuzzleManager.currentPiecesPerLine++;
+		clearPuzzle();
+		CreatePuzzle();
+		StartShuffle();
+	}
+
+	void clearPuzzle() {
+		int childs = transform.childCount;
+		for (int i = childs - 1; i >= 0; i--) {
+			GameObject.Destroy(transform.GetChild(i).gameObject);
+		}
 	}
 }
