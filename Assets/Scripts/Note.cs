@@ -6,17 +6,19 @@ public class Note : MonoBehaviour {
 
 	Rigidbody2D rb;
 	public float speed;
+	GameObject gm;
+
 	void Awake(){
 		rb = GetComponent<Rigidbody2D>();
 	}
 
-	// Use this for initialization
 	void Start () {
+		if(GameManager.difficulty){
+			speed = 5*1.5F;
+		}
+		else{
+			speed = 5;
+		}
 		rb.velocity=new Vector2(0,-speed);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

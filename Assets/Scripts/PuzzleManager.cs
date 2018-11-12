@@ -7,12 +7,14 @@ public class PuzzleManager : MonoBehaviour {
 
 	public Text txt;
 	public Text timer;
+	public int diff;
 	public static int difficulty;
 	public static int currentPiecesPerLine = 2;
 	public static int score = 0;
 	float time;
 
 	void Start() {
+		difficulty = diff;
 		time = 60.0f / difficulty;
 	}
 	
@@ -23,7 +25,7 @@ public class PuzzleManager : MonoBehaviour {
 		timer.text = "Time: " + System.Math.Round(time, 2);
 	}
 
-	public void GameWon() {
+	public static void GameWon() {
 		score++;
 		currentPiecesPerLine += difficulty;
 	}
