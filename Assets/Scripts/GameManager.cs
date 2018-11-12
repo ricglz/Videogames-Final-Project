@@ -8,22 +8,26 @@ public class GameManager : MonoBehaviour {
 	int streak = 0;
 	int misses = 0;
 	int hitNotes = 0;
+	public static bool difficulty = true;
+	AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
-		
+		audioSource = GetComponent<AudioSource>();
+		if(GameManager.difficulty){
+			audioSource.pitch = 1.5f;
+		}
+		else{
+			audioSource.pitch = 1;
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	void OnTriggerEnter2D(Collider2D col){
 		Destroy(col.gameObject);
 		ResetStreak();
 		misses ++;
 		if(misses >= 10){
+			Debug.Log("QUIT");
 			Application.Quit();
 		}
 	}
@@ -44,7 +48,8 @@ public class GameManager : MonoBehaviour {
 			multiplier = 1;
 		}
 
-		if(hitNotes + misses == 103){
+		if(hitNotes + misses >= 103){
+			Debug.Log("QUIT");
 			Application.Quit();
 		}
 		UpdateGUI();
@@ -63,5 +68,9 @@ public class GameManager : MonoBehaviour {
 
 	public int GetScore(){
 		return 100 * multiplier;
+	}
+
+	public bool GetDifficulty(){
+		return difficulty;
 	}
 }
