@@ -27,6 +27,7 @@ public class Puzzle : MonoBehaviour {
 		blocksPerLine = PuzzleManager.currentPiecesPerLine;
 		blocks = new Block[blocksPerLine, blocksPerLine];
 		Texture2D[,] imageSlices = ImageSlicer.GetSlices(image, blocksPerLine);
+		playerMoveDuration = .2f / PuzzleManager.difficulty;
 		for(int i = 0; i < blocksPerLine; i++) {
 			for(int j = 0; j < blocksPerLine; j++) {
 				GameObject blockObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -143,8 +144,7 @@ public class Puzzle : MonoBehaviour {
 	}
 
 	void RestartGame() {
-		PuzzleManager.score++;
-		PuzzleManager.currentPiecesPerLine++;
+		PuzzleManager.GameWon();
 		clearPuzzle();
 		CreatePuzzle();
 		StartShuffle();
