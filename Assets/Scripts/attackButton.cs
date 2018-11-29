@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class attackButton : MonoBehaviour {
-
+public class attackButton : MonoBehaviour
+{
     private GameController gameController;
 
     public void perfectDrawing()
@@ -14,6 +14,10 @@ public class attackButton : MonoBehaviour {
     {
         gameController.fireMixTape();
     }
+    public void rickRoll()
+    {
+        gameController.rickRoll();
+    }
     public void efficientCode()
     {
         gameController.efficientCode();
@@ -21,6 +25,10 @@ public class attackButton : MonoBehaviour {
     public void amazingPresentation()
     {
         gameController.amazingPresentation();
+    }
+    public void suitOn()
+    {
+        gameController.suitOn();
     }
     public void SetGameControllerReference(GameController controller)
     {
