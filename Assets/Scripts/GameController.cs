@@ -19,12 +19,20 @@ public class GameController : MonoBehaviour
     public Text lmcT;
     public GameObject enemy;
     public GameObject lad;
+    public Sprite ladNormal;
+    public Sprite ladAttack;
     public GameObject ladPanel;
     public GameObject imi;
+    public Sprite imiNormal;
+    public Sprite imiAttack;
     public GameObject imiPanel;
     public GameObject itc;
+    public Sprite itcNormal;
+    public Sprite itcAttack;
     public GameObject itcPanel;
     public GameObject lmc;
+    public Sprite lmcNormal;
+    public Sprite lmcAttack;
     public GameObject lmcPanel;
     private List<int> dead = new List<int>();
     // Use this for initialization
@@ -42,6 +50,7 @@ public class GameController : MonoBehaviour
         lifeITC = 70;
         lifeLMC = 100;
         lifeE = 900;
+        enemyT.text = lifeE.ToString();
         ladT.text = lifeLAD.ToString();
         imiT.text = lifeIMI.ToString();
         itcT.text = lifeITC.ToString();
@@ -213,7 +222,8 @@ public class GameController : MonoBehaviour
         if (lifeIMI > 0) imiT.text = lifeIMI.ToString();
         if (lifeITC > 0) itcT.text = lifeITC.ToString();
         if(lifeLMC > 0) lmcT.text = lifeLMC.ToString();
-        if (lifeE < 0)
+        if(lifeE > 0) enemyT.text = lifeE.ToString();
+        if (lifeE <= 0)
         {
             gameOver(1);
         }
@@ -252,6 +262,10 @@ public class GameController : MonoBehaviour
             if (lad.activeSelf)
             {
                 ladPanel.SetActive(true);
+                lad.GetComponent<Image>().sprite = ladAttack;
+                imi.GetComponent<Image>().sprite = imiNormal;
+                itc.GetComponent<Image>().sprite = itcNormal;
+                lmc.GetComponent<Image>().sprite = lmcNormal;
             }
             else
             {
@@ -265,6 +279,10 @@ public class GameController : MonoBehaviour
             if (imi.activeSelf)
             {
                 imiPanel.SetActive(true);
+                lad.GetComponent<Image>().sprite = ladNormal;
+                imi.GetComponent<Image>().sprite = imiAttack;
+                itc.GetComponent<Image>().sprite = itcNormal;
+                lmc.GetComponent<Image>().sprite = lmcNormal;
             }
             else
             {
@@ -277,6 +295,11 @@ public class GameController : MonoBehaviour
             if (itc.activeSelf)
             {
                 itcPanel.SetActive(true);
+                lad.GetComponent<Image>().sprite = ladNormal;
+                imi.GetComponent<Image>().sprite = imiNormal;
+                itc.GetComponent<Image>().sprite = itcAttack;
+                lmc.GetComponent<Image>().sprite = lmcNormal;
+                
             }
             else
             {
@@ -289,6 +312,10 @@ public class GameController : MonoBehaviour
             if (lmc.activeSelf)
             {
                 lmcPanel.SetActive(true);
+                lad.GetComponent<Image>().sprite = ladNormal;
+                imi.GetComponent<Image>().sprite = imiNormal;
+                itc.GetComponent<Image>().sprite = itcNormal;
+                lmc.GetComponent<Image>().sprite = lmcAttack;
             }
             else
             {
