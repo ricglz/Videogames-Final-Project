@@ -18,7 +18,7 @@ public class Activator : MonoBehaviour {
 	void Start(){
 		old = sr.color;
 		gm = GameObject.Find("GameManager");
-		PlayerPrefs.SetInt("Score", 0);
+		PlayerPrefs.SetInt("MusicScore", 0);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -47,6 +47,6 @@ public class Activator : MonoBehaviour {
 	}
 
 	void AddScore(){
-		PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManager>().GetScore());
+		PlayerPrefs.SetInt("MusicScore", PlayerPrefs.GetInt("MusicScore") + gm.GetComponent<GameManager>().GetScore());
 	}
 }

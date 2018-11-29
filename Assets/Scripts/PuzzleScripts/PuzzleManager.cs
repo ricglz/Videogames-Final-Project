@@ -16,7 +16,7 @@ public class PuzzleManager : MonoBehaviour {
 
 	void Start() {
 		difficulty = diff;
-		time = 60.0f / difficulty;
+		time = 80.0f / difficulty;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +34,7 @@ public class PuzzleManager : MonoBehaviour {
 	}
 
 	public static void GameWon() {
-		score++;
+		score += 1000;
 		currentPiecesPerLine += difficulty;
 	}
 }

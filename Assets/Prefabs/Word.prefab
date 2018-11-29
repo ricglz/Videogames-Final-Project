@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114061061254533862}
-  fallSpeed: 1
+  fallSpeed: 10
 --- !u!222 &222228234122040196
 CanvasRenderer:
   m_ObjectHideFlags: 1
