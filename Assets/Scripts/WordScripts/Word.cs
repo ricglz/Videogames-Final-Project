@@ -36,7 +36,6 @@ public class Word {
 		if (wordTyped)
 		{
 			display.RemoveWord();
-			WordGameManager.score++;
 		}
 		return wordTyped;
 	}
