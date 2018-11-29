@@ -12,7 +12,7 @@ public class Block : MonoBehaviour {
   public void init(Vector2Int startingCoordinate, Texture2D image) {
     this.startingCoordinate = startingCoordinate;
     this.coord = startingCoordinate;
-    GetComponent<MeshRenderer>().material.shader = Shader.Find("Unlit/Texture");
+    GetComponent<MeshRenderer>().material = Resources.Load<Material>("Block");
     GetComponent<MeshRenderer>().material.mainTexture = image;
   }
 

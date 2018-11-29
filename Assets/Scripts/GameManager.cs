@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!audioSource.isPlaying){
-			SceneManager.LoadScene(2);
+			SceneManager.LoadScene(0);
 		}
 		
 	}
