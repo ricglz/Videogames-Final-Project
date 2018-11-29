@@ -13,7 +13,7 @@ public class Puzzle : MonoBehaviour {
 	bool blockIsMoving;
 	int shuffleMovesRemaining;
 	Vector2Int previousShuffleOffset;
-	float playerMoveDuration = .2f;
+	float playerMoveDuration;
 	float shuffleMoveDuration = .05f;
 	enum GameState { Solved, Shuffling, Playing }
 	GameState state;
@@ -27,7 +27,6 @@ public class Puzzle : MonoBehaviour {
 		blocksPerLine = PuzzleManager.currentPiecesPerLine;
 		blocks = new Block[blocksPerLine, blocksPerLine];
 		Texture2D[,] imageSlices = ImageSlicer.GetSlices(image, blocksPerLine);
-		playerMoveDuration = .2f / PuzzleManager.difficulty;
 		for(int i = 0; i < blocksPerLine; i++) {
 			for(int j = 0; j < blocksPerLine; j++) {
 				GameObject blockObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -50,6 +49,7 @@ public class Puzzle : MonoBehaviour {
 	}
 
 	void PlayerMoveBlockInput(Block blockToMove) {
+
 		if(state == GameState.Playing) {
 			inputs.Enqueue(blockToMove);
 			MakeNextPlayerMove();
@@ -67,9 +67,9 @@ public class Puzzle : MonoBehaviour {
 			blocks[blockToMove.coord.x, blockToMove.coord.y] = emptyBlock;
 			blocks[emptyBlock.coord.x, emptyBlock.coord.y] = blockToMove;
 
-			Vector2Int targetCoord = blockToMove.coord;
-			blockToMove.coord = emptyBlock.coord;
-			emptyBlock.coord = targetCoord;
+			Vector2Int targetCoord = emptyBlock.coord;
+			emptyBlock.coord = blockToMove.coord;
+			blockToMove.coord = targetCoord;
 
 			Vector2 targetPos = emptyBlock.transform.position;
 			emptyBlock.transform.position = blockToMove.transform.position;
@@ -87,7 +87,8 @@ public class Puzzle : MonoBehaviour {
 		CheckIfIsSolved();
 		if(state == GameState.Playing) {
 			MakeNextPlayerMove();
-		} else if(state == GameState.Shuffling) {
+		} 
+    else if(state == GameState.Shuffling) {
 			if(shuffleMovesRemaining > 0) {
 				makeNextShuffleMove();
 			} else {
@@ -98,7 +99,7 @@ public class Puzzle : MonoBehaviour {
 
 	void StartShuffle() {
 		state = GameState.Shuffling;
-		shuffleMovesRemaining = shuffleLength;
+		shuffleMovesRemaining = shuffleLength * PuzzleManager.currentPiecesPerLine / 2;
 		emptyBlock.gameObject.SetActive(false);
 		makeNextShuffleMove();
 	}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PuzzleManager : MonoBehaviour {
 
@@ -23,6 +24,13 @@ public class PuzzleManager : MonoBehaviour {
 		time -= Time.deltaTime;
 		txt.text = "Score: " + score;
 		timer.text = "Time: " + System.Math.Round(time, 2);
+		if(time <= 0) {
+			int currentMaxScore = PlayerPrefs.GetInt("PuzzleScore");
+			if(score > currentMaxScore) {
+				PlayerPrefs.SetInt("PuzzleScore", score);
+			}
+			SceneManager.LoadScene("Menu 3D");
+		}
 	}
 
 	public static void GameWon() {
