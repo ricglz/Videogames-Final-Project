@@ -22,6 +22,7 @@ public class WordDisplay : MonoBehaviour {
 	public void RemoveWord ()
 	{
 		Destroy(gameObject);
+        Score.scoreValue +=100;
 	}
 
 	private void Update()
