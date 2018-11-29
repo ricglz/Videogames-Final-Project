@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -20,16 +21,22 @@ public class GameManager : MonoBehaviour {
 		else{
 			audioSource.pitch = 1;
 		}
+
+		Debug.Log(audioSource.pitch);
+	}
+
+	// Update is called once per frame
+	void Update () {
+		if(!audioSource.isPlaying){
+			SceneManager.LoadScene(2);
+		}
+		
 	}
 	
 	void OnTriggerEnter2D(Collider2D col){
 		Destroy(col.gameObject);
 		ResetStreak();
 		misses ++;
-		if(misses >= 10){
-			Debug.Log("QUIT");
-			Application.Quit();
-		}
 	}
 	
 	public void AddStreak(){
@@ -46,11 +53,6 @@ public class GameManager : MonoBehaviour {
 		}
 		else{
 			multiplier = 1;
-		}
-
-		if(hitNotes + misses >= 103){
-			Debug.Log("QUIT");
-			Application.Quit();
 		}
 		UpdateGUI();
 	}
